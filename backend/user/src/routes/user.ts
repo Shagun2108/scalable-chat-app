@@ -1,7 +1,14 @@
 import express from 'express'
-import { loginUser } from '../controllers/user.js';
+import { getAllUsers, getUser, loginUser, myProfile, updatename, verifyUser } from '../controllers/user.js';
+import { isAuth } from '../middleware/isAuth.js';
 const router = express.Router();
 
-router.post('/login',loginUser)
+router.post('/login',loginUser);
+router.post('/verify',verifyUser);
+router.get('/me',isAuth,myProfile);
+router.get('/user/all',isAuth,getAllUsers);
+router.get('/user/:id',isAuth,getUser);
+router.post("/update/user",isAuth,updatename);
+
 
 export default router
